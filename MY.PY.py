@@ -933,6 +933,50 @@ COMPLETE_HTML = r"""<!DOCTYPE html>
     }
 
     /* ══════════════════════════════════════════════════════════════════
+       JHOL + ROMANTIC EXTRAS
+    ══════════════════════════════════════════════════════════════════ */
+    @keyframes shimmerText {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    #sheWhyMe { background-size: 200% auto; }
+    .jhol-lyric-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      line-height: 2.4;
+      color: rgba(232,220,208,0.3);
+      transition: color 0.5s, text-shadow 0.5s, transform 0.5s, font-size 0.5s;
+      padding: 0 0.5rem;
+    }
+    .jhol-lyric-line.active-lyric {
+      color: #f5edd8;
+      font-size: clamp(1.1rem, 3vw, 1.55rem);
+      text-shadow: 0 0 30px rgba(201,168,76,0.5), 0 0 60px rgba(181,41,78,0.3);
+      transform: scale(1.04);
+      font-style: italic;
+    }
+    .jhol-lyric-line.near-lyric { color: rgba(232,208,138,0.6); }
+
+    @keyframes heartbeatBig {
+      0%,100% { transform:scale(1); }
+      14%     { transform:scale(1.22); }
+      28%     { transform:scale(1); }
+      42%     { transform:scale(1.15); }
+      56%     { transform:scale(1); }
+    }
+    @keyframes tickerScroll {
+      0%   { transform:translateX(0); }
+      100% { transform:translateX(-50%); }
+    }
+    .ticker-item {
+      display:inline-flex;align-items:center;gap:0.8rem;
+      font-family:'Cormorant Garamond',serif;font-style:italic;
+      font-size:1rem;color:var(--gold2);letter-spacing:0.04em;flex-shrink:0;
+    }
+    .ticker-sep { color:var(--rose);font-size:0.7rem; }
+    #jholPlayBtn:hover { transform:scale(1.1);box-shadow:0 8px 30px rgba(181,41,78,0.5)!important; }
+
+    /* ══════════════════════════════════════════════════════════════════
        UTILITIES
     ══════════════════════════════════════════════════════════════════ */
     .text-center { text-align:center; }
@@ -1070,6 +1114,197 @@ COMPLETE_HTML = r"""<!DOCTYPE html>
     </div>
   </div>
 </section>
+
+<!-- ════════════════════════════════════════════════════
+  ⑥-b JHOL LYRICS CINEMATIC VIDEO
+════════════════════════════════════════════════════ -->
+<section id="jholSection" style="padding:6rem 0;">
+  <div class="section-wrap text-center">
+    <div class="reveal">
+      <p class="section-label">Dhurandhar — A Song For You</p>
+      <h2 class="section-title">Yeh Gana <em>Tumhare Liye</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="reveal glass-card" style="transition-delay:0.1s; padding:0; overflow:hidden; position:relative;">
+
+      <!-- Cinematic header -->
+      <div id="jholHeader" style="
+        position:relative;
+        background: linear-gradient(160deg, #0a0315 0%, #1a0830 50%, #0d0520 100%);
+        padding: 2.5rem 2rem 1.5rem;
+        border-bottom: 1px solid rgba(201,168,76,0.15);
+        overflow:hidden;
+      ">
+        <!-- Animated bg particles -->
+        <canvas id="jholBgCanvas" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none;"></canvas>
+
+        <div style="position:relative;z-index:2;">
+          <p style="
+            font-family:var(--display);
+            font-size:0.65rem;
+            letter-spacing:0.5em;
+            color:rgba(201,168,76,0.6);
+            text-transform:uppercase;
+            margin-bottom:0.6rem;
+          ">Ek Sawaal — Dil Se</p>
+
+          <div id="sheWhyMe" style="
+            font-family:'Cinzel',serif;
+            font-size:clamp(1.6rem,5vw,3rem);
+            font-weight:400;
+            letter-spacing:0.08em;
+            line-height:1.3;
+            margin-bottom:0.4rem;
+            background: linear-gradient(135deg, #f5edd8 30%, #c9a84c 60%, #f0a0bb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s ease-in-out infinite alternate;
+          ">
+            <span style="-webkit-text-fill-color:var(--rose3);color:var(--rose3);opacity:0.9;font-size:0.7em;display:block;margin-bottom:0.2rem;letter-spacing:0.3em;font-family:var(--serif);font-style:italic;">She:</span>
+            Why Me?
+          </div>
+          <p style="font-family:var(--serif);font-style:italic;color:rgba(168,149,128,0.7);font-size:0.9rem;">Jhol — Dhurandhar</p>
+        </div>
+      </div>
+
+      <!-- Lyrics scroll area -->
+      <div id="jholLyricsWrap" style="
+        position:relative;
+        background: linear-gradient(180deg, #07020f 0%, #0f0520 100%);
+        height: 280px;
+        overflow:hidden;
+      ">
+        <!-- Top & bottom fade masks -->
+        <div style="position:absolute;top:0;left:0;right:0;height:60px;background:linear-gradient(to bottom,#07020f,transparent);z-index:3;pointer-events:none;"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,#0f0520,transparent);z-index:3;pointer-events:none;"></div>
+
+        <!-- Active lyric highlight bar -->
+        <div style="
+          position:absolute;left:0;right:0;
+          top:50%;transform:translateY(-50%);
+          height:52px;
+          background:linear-gradient(90deg,transparent,rgba(181,41,78,0.08),rgba(201,168,76,0.06),transparent);
+          border-top:1px solid rgba(201,168,76,0.12);
+          border-bottom:1px solid rgba(201,168,76,0.12);
+          z-index:2;pointer-events:none;
+        "></div>
+
+        <div id="jholLyrics" style="
+          position:absolute;
+          left:0;right:0;
+          text-align:center;
+          padding:0 1.5rem;
+          will-change:transform;
+        "></div>
+      </div>
+
+      <!-- Controls bar -->
+      <div style="
+        display:flex;align-items:center;justify-content:center;gap:1.2rem;
+        padding:1.2rem 1.5rem;
+        background:rgba(10,3,20,0.9);
+        border-top:1px solid rgba(201,168,76,0.1);
+      ">
+        <button id="jholPlayBtn" onclick="toggleJhol()" style="
+          width:48px;height:48px;border-radius:50%;
+          background:linear-gradient(135deg,#7a1530,#b5294e);
+          border:1px solid rgba(181,41,78,0.4);
+          color:#f5edd8;font-size:1.1rem;cursor:pointer;
+          display:flex;align-items:center;justify-content:center;
+          transition:transform 0.2s,box-shadow 0.2s;
+          box-shadow:0 4px 20px rgba(181,41,78,0.3);
+          flex-shrink:0;
+        ">▶</button>
+        <div>
+          <div style="font-family:var(--display);font-size:0.65rem;letter-spacing:0.2em;color:var(--gold2);text-transform:uppercase;">Jhol</div>
+          <div id="jholStatus" style="font-family:var(--serif);font-style:italic;font-size:0.78rem;color:var(--text2);">Tap to play with lyrics</div>
+        </div>
+        <div style="margin-left:auto;font-family:var(--display);font-size:0.6rem;letter-spacing:0.15em;color:var(--text2);">Dhurandhar</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════
+  ⑥-c LOVE PULSE METER
+════════════════════════════════════════════════════ -->
+<section id="lovePulse" style="padding:4rem 0;">
+  <div class="section-wrap text-center">
+    <div class="reveal">
+      <p class="section-label">My Heart Says</p>
+      <h2 class="section-title">Dil Ki <em>Dhadkan</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="reveal glass-card" style="transition-delay:0.1s;padding:3rem 2rem;">
+      <p style="font-family:var(--serif);font-style:italic;color:var(--text2);margin-bottom:2rem;">Yeh meter tab barhta hai jab Begam Ji paas hoti hain 💗</p>
+      <div style="position:relative;height:18px;background:rgba(255,255,255,0.05);border-radius:50px;border:1px solid rgba(201,168,76,0.2);overflow:hidden;margin-bottom:1.5rem;">
+        <div id="loveMeterBar" style="
+          height:100%;width:0%;
+          background:linear-gradient(90deg,#7a1530,#b5294e,#d4567a,#f0a0bb);
+          border-radius:50px;
+          transition:width 0.08s linear;
+          box-shadow:0 0 20px rgba(181,41,78,0.5);
+        "></div>
+      </div>
+      <div id="loveMeterLabel" style="
+        font-family:var(--display);font-size:0.8rem;
+        letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;
+      ">Calculating love…</div>
+
+      <div id="bigHeart" style="
+        font-size:4rem;margin-top:1.5rem;
+        display:inline-block;
+        animation:heartbeatBig 1.4s ease-in-out infinite;
+        filter:drop-shadow(0 0 20px rgba(181,41,78,0.6));
+        cursor:pointer;
+      " onclick="boostHeart()">❤️</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════
+  ⑥-d LOVE QUOTE TICKER
+════════════════════════════════════════════════════ -->
+<section id="quoteTicker" style="padding:2rem 0;overflow:hidden;">
+  <div style="
+    border-top:1px solid rgba(201,168,76,0.12);
+    border-bottom:1px solid rgba(201,168,76,0.12);
+    background:rgba(10,3,20,0.6);
+    padding:1.1rem 0;
+    overflow:hidden;
+    position:relative;z-index:5;
+  ">
+    <div id="tickerTrack" style="
+      display:flex;gap:4rem;
+      white-space:nowrap;
+      animation:tickerScroll 35s linear infinite;
+      width:max-content;
+    ">
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════
+  ⑥-e FLOATING HEARTS RAIN
+════════════════════════════════════════════════════ -->
+<canvas id="heartsCanvas" style="
+  position:fixed;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:1;opacity:0;
+  transition:opacity 1s;
+"></canvas>
+<button id="heartsToggle" onclick="toggleHearts()" style="
+  position:fixed;bottom:5.5rem;right:1.25rem;
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#4a0f20,#7a1530);
+  border:1px solid rgba(181,41,78,0.35);
+  color:var(--rose3);font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:9000;
+  box-shadow:0 4px 20px rgba(181,41,78,0.25);
+  transition:transform 0.2s,box-shadow 0.2s;
+" title="Toggle heart rain">🌸</button>
 
 <!-- ════════════════════════════════════════════════════
   ⑦ SURPRISE CARDS
@@ -1699,6 +1934,276 @@ musicBtn.addEventListener('click', () => {
     musicBtn.style.color = '';
   }
 });
+
+/* ══════════════════════════════════════════════════════════════════
+   JHOL LYRICS PLAYER
+══════════════════════════════════════════════════════════════════ */
+const JHOL_LYRICS = [
+  { t:0,   text:"♪ Jhol…" },
+  { t:2,   text:"Teri aankhon mein kho jaata hoon main" },
+  { t:5.5, text:"Dil ka hai ye haal, samjhe na samjhe" },
+  { t:9,   text:"Tu hai meri saans, tu hi meri jaan" },
+  { t:12.5,text:"Tere bina jeena, ab nahi aasaan" },
+  { t:16,  text:"Jhol… tu hai mera noor" },
+  { t:19,  text:"Jhol… tu hai meri duur" },
+  { t:22,  text:"Har pal teri yaad, har lamha tuu…" },
+  { t:26,  text:"Kyun mujhse itna pyaar karta hai?" },
+  { t:29,  text:"Kyun mujhe itna khaas karta hai?" },
+  { t:32,  text:"Main toh aadat ban gayi hoon teri" },
+  { t:35.5,text:"Tu meri zindagi, tu meri kahani…" },
+  { t:39,  text:"Jhol… sirf tera hoon main" },
+  { t:42,  text:"Jhol… hamesha rahoon tere sang" },
+  { t:45,  text:"Teri mohabbat mein pagal hoon main" },
+  { t:48,  text:"Dil ke dhadkan mein bas tu hi tu…" },
+];
+
+// Jhol animated background canvas
+(function(){
+  const c = document.getElementById('jholBgCanvas');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  let W, H, pts=[];
+  function resize(){ W=c.width=c.offsetWidth; H=c.height=c.offsetHeight; }
+  window.addEventListener('resize', resize); resize();
+  for(let i=0;i<60;i++) pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+0.3,a:Math.random(),s:(Math.random()-0.5)*0.004,vx:(Math.random()-0.5)*0.2,vy:(Math.random()-0.5)*0.2});
+  function draw(){
+    if(W!==c.offsetWidth){ resize(); }
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.a+=p.s; if(p.a<0||p.a>1)p.s*=-1;
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,168,76,${p.a*0.6})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Build lyric lines
+(function(){
+  const wrap = document.getElementById('jholLyrics');
+  if(!wrap) return;
+  JHOL_LYRICS.forEach((l,i)=>{
+    const d = document.createElement('div');
+    d.className='jhol-lyric-line'; d.id='jl'+i; d.textContent=l.text;
+    wrap.appendChild(d);
+  });
+  // spacer so first lyric starts in center
+  wrap.style.paddingTop = '120px';
+  wrap.style.paddingBottom = '120px';
+})();
+
+let jholPlaying=false, jholYT=null, jholInterval=null, jholStart=null;
+
+function toggleJhol(){
+  if(!jholPlaying){
+    startJhol();
+  } else {
+    stopJhol();
+  }
+}
+
+function startJhol(){
+  jholPlaying=true;
+  const btn=document.getElementById('jholPlayBtn');
+  const status=document.getElementById('jholStatus');
+  btn.textContent='⏸';
+  status.textContent='Now playing ♪ Jhol';
+
+  // Open YouTube in ytFrame with Jhol
+  const frame = document.getElementById('ytFrame');
+  frame.src='https://www.youtube.com/embed/4AkuzW01kxE?autoplay=1&start=0';
+  frame.style.display='block';
+
+  jholStart=Date.now();
+  animateLyrics();
+}
+
+function stopJhol(){
+  jholPlaying=false;
+  const btn=document.getElementById('jholPlayBtn');
+  const status=document.getElementById('jholStatus');
+  btn.textContent='▶';
+  status.textContent='Tap to play with lyrics';
+  clearInterval(jholInterval);
+  const frame=document.getElementById('ytFrame');
+  frame.src='';
+  frame.style.display='none';
+  // reset all lyrics
+  document.querySelectorAll('.jhol-lyric-line').forEach(el=>{
+    el.classList.remove('active-lyric','near-lyric');
+  });
+}
+
+function animateLyrics(){
+  if(!jholPlaying) return;
+  const elapsed=(Date.now()-jholStart)/1000;
+  let activeIdx=-1;
+  for(let i=0;i<JHOL_LYRICS.length;i++){
+    if(elapsed>=JHOL_LYRICS[i].t){
+      activeIdx=i;
+    }
+  }
+  document.querySelectorAll('.jhol-lyric-line').forEach((el,i)=>{
+    el.classList.remove('active-lyric','near-lyric');
+    if(i===activeIdx) el.classList.add('active-lyric');
+    else if(i===activeIdx-1||i===activeIdx+1) el.classList.add('near-lyric');
+  });
+  // Scroll active lyric to center
+  if(activeIdx>=0){
+    const wrap=document.getElementById('jholLyricsWrap');
+    const activeLine=document.getElementById('jl'+activeIdx);
+    if(activeLine&&wrap){
+      const lineTop=activeLine.offsetTop;
+      const lineH=activeLine.offsetHeight;
+      const wrapH=wrap.offsetHeight;
+      const target=lineTop-wrapH/2+lineH/2+120; // +120 for paddingTop
+      const lyricsEl=document.getElementById('jholLyrics');
+      lyricsEl.style.transform=`translateY(${-target}px)`;
+      lyricsEl.style.transition='transform 0.6s cubic-bezier(.16,1,.3,1)';
+    }
+  }
+  // Stop after last lyric
+  if(elapsed>JHOL_LYRICS[JHOL_LYRICS.length-1].t+4){
+    stopJhol(); return;
+  }
+  requestAnimationFrame(animateLyrics);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   LOVE PULSE METER
+══════════════════════════════════════════════════════════════════ */
+(function(){
+  const LABELS=[
+    [0,  "Calculating love…"],
+    [20, "Dil dhadakne laga ❤️"],
+    [40, "Ishq barh raha hai 💕"],
+    [60, "Mohabbat overload! 💖"],
+    [80, "Dil full capacity pe hai 💘"],
+    [99, "∞ — Koi limit nahi Begam Ji ke liye 💞"],
+  ];
+  let v=0, dir=1, boostVal=0;
+  const bar=document.getElementById('loveMeterBar');
+  const label=document.getElementById('loveMeterLabel');
+  if(!bar||!label) return;
+
+  function tick(){
+    boostVal=Math.max(0,boostVal-0.3);
+    v += dir*0.18 + boostVal;
+    if(v>=100){ v=100; dir=-1; }
+    if(v<=0){ v=0; dir=1; }
+    bar.style.width=v.toFixed(1)+'%';
+    let lbl=LABELS[0][1];
+    for(let i=0;i<LABELS.length;i++){ if(v>=LABELS[i][0]) lbl=LABELS[i][1]; }
+    label.textContent=lbl;
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  window.boostHeart=function(){
+    boostVal=5;
+    const h=document.getElementById('bigHeart');
+    if(!h)return;
+    h.style.transform='scale(2)';
+    h.style.filter='drop-shadow(0 0 40px rgba(181,41,78,0.9))';
+    setTimeout(()=>{ h.style.transform=''; h.style.filter=''; }, 400);
+    launchFireworks();
+  };
+})();
+
+
+/* ══════════════════════════════════════════════════════════════════
+   LOVE QUOTE TICKER
+══════════════════════════════════════════════════════════════════ */
+(function(){
+  const QUOTES=[
+    "Tum meri duniya ho ✦",
+    "Har saans mein teri yaad hai 🌹",
+    "Ishq tera, pyaar tera — sab tera ❤️",
+    "Aankhon mein bas tum ho 💫",
+    "Tum ho toh main hoon ✦",
+    "Meri jaan, meri Begam Ji 🥀",
+    "Har pal tujhe chahta hoon 💕",
+    "Dil ki dhadkan — Begam Ji ✦",
+    "Tu hai meri rooshni 🌙",
+    "Love you beyond words, always ❤️",
+  ];
+  const track=document.getElementById('tickerTrack');
+  if(!track) return;
+  // Double the quotes for seamless loop
+  const all=[...QUOTES,...QUOTES];
+  all.forEach((q,i)=>{
+    const span=document.createElement('span');
+    span.className='ticker-item';
+    span.innerHTML=q+(i<all.length-1?'<span class="ticker-sep">✦</span>':'');
+    track.appendChild(span);
+  });
+})();
+
+
+/* ══════════════════════════════════════════════════════════════════
+   FLOATING HEARTS RAIN CANVAS
+══════════════════════════════════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('heartsCanvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W,H,hearts=[],heartsActive=false;
+
+  function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; }
+  window.addEventListener('resize',resize); resize();
+
+  function spawnHeart(){
+    const chars=['❤️','💕','💖','💗','💓','🌹','✦'];
+    hearts.push({
+      x:Math.random()*W, y:-30,
+      vy:0.8+Math.random()*1.5,
+      vx:(Math.random()-0.5)*0.5,
+      size:16+Math.random()*20,
+      a:0.7+Math.random()*0.3,
+      ch:chars[Math.floor(Math.random()*chars.length)],
+      rot:Math.random()*Math.PI*2,
+      rotV:(Math.random()-0.5)*0.03,
+    });
+  }
+
+  function drawHearts(){
+    ctx.clearRect(0,0,W,H);
+    hearts.forEach(h=>{
+      h.y+=h.vy; h.x+=h.vx; h.rot+=h.rotV;
+      ctx.save();
+      ctx.globalAlpha=h.a;
+      ctx.font=h.size+'px serif';
+      ctx.translate(h.x,h.y);
+      ctx.rotate(h.rot);
+      ctx.fillText(h.ch,0,0);
+      ctx.restore();
+    });
+    hearts=hearts.filter(h=>h.y<H+40);
+    if(heartsActive) requestAnimationFrame(drawHearts);
+    else ctx.clearRect(0,0,W,H);
+  }
+
+  let spawnTimer=null;
+  window.toggleHearts=function(){
+    heartsActive=!heartsActive;
+    const btn=document.getElementById('heartsToggle');
+    if(heartsActive){
+      c.style.opacity='1';
+      spawnTimer=setInterval(spawnHeart,120);
+      drawHearts();
+      if(btn) btn.style.background='linear-gradient(135deg,#b5294e,#d4567a)';
+    } else {
+      c.style.opacity='0';
+      clearInterval(spawnTimer);
+      if(btn) btn.style.background='linear-gradient(135deg,#4a0f20,#7a1530)';
+    }
+  };
+})();
+
 
 /* ── HERO DATE ───────────────────────────────────────────────────── */
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
