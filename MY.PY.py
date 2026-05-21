@@ -349,7 +349,7 @@ COMPLETE_HTML = r"""<!DOCTYPE html>
   <div class="section-wrap">
     <div class="reveal">
       <p class="section-label">Our Memories</p>
-      <h2 class="section-title">Hamaari <em>Khaas Yadein</em></h2>
+      <h2 class="section-title">MY MOST FAVORITE <em>GALLERY</em></h2>
       <div class="gold-line"></div>
       <p class="text-center" style="font-family:var(--serif);font-style:italic;color:var(--text2);margin-bottom:0.5rem">Har tasveer mein ek kahani hai — click karo aur mehsoos karo 🖤</p>
     </div>
@@ -416,7 +416,7 @@ COMPLETE_HTML = r"""<!DOCTYPE html>
         </div>
       </div>
       <p style="text-align:center;font-family:var(--serif);font-style:italic;color:var(--text2);font-size:0.9rem;margin-top:1rem;opacity:0.7;">
-        📁 Video upload karo: <code style="color:var(--gold)">static/jhol.mp4</code> — automatically yahan play hoga
+        Here Is The Answer: <code style="color:var(--gold)">static/jhol.mp4</code> 
       </p>
     </div>
   </div>
