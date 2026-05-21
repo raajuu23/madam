@@ -393,7 +393,7 @@ COMPLETE_HTML = r"""<!DOCTYPE html>
     <div class="reveal she-header">
       <p class="section-label">Ek Sawaal — Dil Se</p>
       <div class="she-question">She: Why Me?</div>
-      <p class="she-sub">Jhol — Dhurandhar · Yeh jawab sirf dil jaanta hai 💕</p>
+      <p class="she-sub">Yeh jawab sirf dil jaanta hai 💕</p>
       <div class="gold-line" style="margin-top:1.5rem"></div>
     </div>
     <div class="reveal" style="transition-delay:0.15s">
