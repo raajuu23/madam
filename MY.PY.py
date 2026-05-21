@@ -845,7 +845,7 @@ LOGIN_PAGE = """<!DOCTYPE html>
 <div class="card">
   <p class="ornament">— A Private Invitation —</p>
   <h1>Welcome<span>Begam Ji</span></h1>
-  <p class="sub">Mustafa ki mohabbat ka ek khaas raaz</p>
+  <p class="sub">Only For My Favorite one..</p>
   <div class="gold-bar"></div>
   <form action="/check_password" method="post">
     <input type="password" name="password" placeholder="Enter the secret word…" autocomplete="off">
