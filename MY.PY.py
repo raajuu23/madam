@@ -348,7 +348,7 @@ COMPLETE_HTML = r"""<!DOCTYPE html>
 <section id="gallery">
   <div class="section-wrap">
     <div class="reveal">
-      <p class="section-label">Our Memories</p>
+      <p class="section-label">BELLOW IS</p>
       <h2 class="section-title">MY MOST FAVORITE <em>GALLERY</em></h2>
       <div class="gold-line"></div>
       <p class="text-center" style="font-family:var(--serif);font-style:italic;color:var(--text2);margin-bottom:0.5rem">Har tasveer mein ek kahani hai — click karo aur mehsoos karo 🖤</p>
