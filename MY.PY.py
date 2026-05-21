@@ -508,7 +508,7 @@ COMPLETE_HTML = r"""<!DOCTYPE html>
       <p class="section-label">Wish Upon A Star</p>
       <h2 class="section-title">Ek <em>Dua Maango</em></h2>
       <div class="gold-line"></div>
-      <p style="font-family:var(--serif);font-style:italic;color:var(--text2)">Kisi bhi star pe click karo — Mustafa ne qasam khayi hai 💫</p>
+      <p style="font-family:var(--serif);font-style:italic;color:var(--text2)">Kisi bhi star pe click karo💫</p>
     </div>
     <div class="stars-row" id="starsRow"></div>
     <div id="wishGranted" class="reveal">
