@@ -2,3 +2,4 @@ python-telegram-bot==21.10
 PyGithub==2.1.1
 FastAPI
 python-multipart
+uvicorn
