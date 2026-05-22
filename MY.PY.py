@@ -12,7 +12,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # ========== CONFIGURATION — YAHAN APNI DETAILS BHARO ==========
 CORRECT_PASSWORD = "HAPPY BIRTHDAY WIFFEEEYYY JIII"
 
-RELATIONSHIP_START = datetime(2023, 1, 15, 18, 30)
+RELATIONSHIP_START = datetime(2024, 5, 18, 19, 0)
 
 PHOTO_CONFIG = [
     {"img": "photo1.jpg", "title": "Saari Mein",        "desc": "Sabse khoobsurat insaan is duniya mein 💘"},
